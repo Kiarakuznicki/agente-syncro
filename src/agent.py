@@ -1,4 +1,5 @@
 import time
+import concurrent.futures
 
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
@@ -60,7 +61,13 @@ def responder_pregunta(pregunta: str, vectorstore, llm=None) -> dict:
     retriever = vectorstore.as_retriever(search_kwargs={"k": config.TOP_K})
 
     print(f"[{time.strftime('%H:%M:%S')}] Buscando documentos relevantes...", flush=True)
-    documentos = retriever.invoke(pregunta)
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        future = executor.submit(retriever.invoke, pregunta)
+        try:
+            documentos = future.result(timeout=20)
+        except concurrent.futures.TimeoutError:
+            raise RuntimeError("La búsqueda de documentos tardó demasiado (posible límite de la API de Google). Probá de nuevo en un momento.")
+
     print(f"[{time.strftime('%H:%M:%S')}] Encontrados {len(documentos)} docs. Armando contexto...", flush=True)
     contexto = formatear_contexto(documentos)
 
