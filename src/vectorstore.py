@@ -12,12 +12,7 @@ MARCADOR_COMPLETO = "_indexacion_completa.ok"
 
 
 def crear_embeddings():
-    return GoogleGenerativeAIEmbeddings(
-        model=config.EMBEDDING_MODEL,
-        request_options={"timeout": 30},
-        transport="rest",
-    )
-
+    return FastEmbedEmbeddings(model_name="BAAI/bge-small-en-v1.5")
 
 def indexacion_completa() -> bool:
     marcador = os.path.join(config.PERSIST_DIRECTORY, MARCADOR_COMPLETO)
