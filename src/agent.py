@@ -39,6 +39,8 @@ def crear_llm():
         temperature=config.LLM_TEMPERATURE,
         api_key=config.GROQ_API_KEY,
         max_tokens= 300,
+        timeout=30,
+        max_retries=2,
     )
 
 
