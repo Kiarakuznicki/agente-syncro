@@ -54,14 +54,21 @@ async function enviarPregunta(pregunta) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ pregunta }),
     });
-    const data = await res.json();
-    quitarEscribiendo();
+    console.log('Status:', res.status);
+console.log('OK:', res.ok);
+console.log('Content-Type:', res.headers.get('content-type'));
 
-    if (!res.ok) {
-      agregarMensaje(data.error || 'Ocurrió un error al procesar la pregunta.', 'bot');
-    } else {
-      agregarMensaje(data.respuesta, 'bot');
-    }
+const texto = await res.text();
+console.log('Respuesta del servidor:', texto);
+
+quitarEscribiendo();
+
+if (!res.ok) {
+  agregarMensaje(`Error del servidor (${res.status}): ${texto}`, 'bot');
+} else {
+  const data = JSON.parse(texto);
+  agregarMensaje(data.respuesta, 'bot');
+}
   } catch (err) {
     quitarEscribiendo();
     agregarMensaje('No se pudo conectar con el servidor. Intentá de nuevo.', 'bot');
