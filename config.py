@@ -12,8 +12,7 @@ CHUNK_OVERLAP = 150
 PERSIST_DIRECTORY = "db"
 COLLECTION_NAME = "documento_base"
 
-EMBEDDING_MODEL = "gemini-embedding-001"
-
+EMBEDDING_MODEL = "BAAI/bge-small-en-v1.5"
 LLM_MODEL = "openai/gpt-oss-120b"
 LLM_TEMPERATURE = 0
 
