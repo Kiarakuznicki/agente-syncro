@@ -15,6 +15,7 @@ def crear_embeddings():
     return GoogleGenerativeAIEmbeddings(
         model=config.EMBEDDING_MODEL,
         request_options={"timeout": 30},
+        transport="rest",
     )
 
 
