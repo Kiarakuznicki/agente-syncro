@@ -12,8 +12,7 @@ print("Listo. Base de conocimiento cargada.")
 
 @app.route("/")
 def index():
-    return send_from_directory(app.static_folder, "index.html")
-
+    return send_from_directory(app.static_folder, "pagina_demo.html")
 
 @app.route("/api/preguntar", methods=["POST"])
 def preguntar():
@@ -39,4 +38,6 @@ def preguntar():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8501, debug=False)
+    import os
+    port = int(os.environ.get("PORT", 8501))
+    app.run(host="0.0.0.0", port=port, debug=False)
