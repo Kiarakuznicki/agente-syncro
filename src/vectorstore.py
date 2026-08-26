@@ -12,9 +12,10 @@ MARCADOR_COMPLETO = "_indexacion_completa.ok"
 
 
 def crear_embeddings():
-    return GoogleGenerativeAIEmbeddings(model=config.EMBEDDING_MODEL,
-                                       request_options={"timeout": 30},
-                                       )
+    return GoogleGenerativeAIEmbeddings(
+        model=config.EMBEDDING_MODEL,
+        request_options={"timeout": 30},
+    )
 
 
 def indexacion_completa() -> bool:
