@@ -59,13 +59,13 @@ def responder_pregunta(pregunta: str, vectorstore, llm=None) -> dict:
     llm = llm or crear_llm()
     retriever = vectorstore.as_retriever(search_kwargs={"k": config.TOP_K})
 
-    print(f"[{time.strftime('%H:%M:%S')}] Buscando documentos relevantes...")
+    print(f"[{time.strftime('%H:%M:%S')}] Buscando documentos relevantes..." flush=True)
     documentos = retriever.invoke(pregunta)
-    print(f"[{time.strftime('%H:%M:%S')}] Encontrados {len(documentos)} docs. Armando contexto...")
+    print(f"[{time.strftime('%H:%M:%S')}] Encontrados {len(documentos)} docs. Armando contexto..." flush=True)
     contexto = formatear_contexto(documentos)
 
     cadena = PROMPT | llm | StrOutputParser()
-    print(f"[{time.strftime('%H:%M:%S')}] Llamando al LLM (Groq)...")
+    print(f"[{time.strftime('%H:%M:%S')}] Llamando al LLM (Groq)..." flush=True)
     respuesta = cadena.invoke({"context": contexto, "pregunta": pregunta})
     print(f"[{time.strftime('%H:%M:%S')}] Respuesta generada.")
 
