@@ -1,0 +1,189 @@
+:root {
+  --lima-principal: #b7e61d;
+  --lima-intenso: #a6db1f;
+  --verde-sombra: #7ea312;
+  --bg: #0c0c0e;
+  --fondo-principal: #05070b;
+  --fondo-secundario: #0B0E13;
+  --gris-oscuro: #1B1F27;
+  --gris-medio: #2B3038;
+  --white: #ffffff;
+  --gris-claro: #8a8a92;
+  --radius: 18px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--white);
+  height: 100vh;
+  overflow: hidden;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-width: 400px;
+  margin: 0 auto;
+  background: var(--bg);
+  border: solid, 3px, var(--lima-principal);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--gris-medio);
+  flex-shrink: 0;
+}
+
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand img {
+  width: 3rem;
+}
+
+.brand-badge {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--fondo-principal);
+  border: 1.5px solid var(--lima-principal);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+.brand-text h1 {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--white);
+}
+
+.brand-text h1 .accent { color: var(--lima-principal);
+font-size: 16px;
+font-weight: 700;
+letter-spacing: 0.5px;
+  
+}
+
+
+.brand-text span {
+  font-size: 12px;
+  color: var(--gris-claro);
+}
+
+.close-btn {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  color: var(--gris-claro);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s, color 0.15s;
+}
+.close-btn:hover { background: var(--fondo-principal); color: var(--white); }
+
+.chat-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 18px;
+  background: var(--bg);
+}
+
+.chat { display: flex; flex-direction: column; gap: 14px; }
+
+.msg { display: flex; flex-direction: column; max-width: 82%; }
+.msg.user { align-self: flex-end; align-items: flex-end; }
+.msg.bot { align-self: flex-start; align-items: flex-start; }
+
+.msg .bubble {
+  padding: 12px 15px;
+  border-radius: var(--radius);
+  font-size: 14px;
+  line-height: 1.55;
+  white-space: pre-wrap;
+}
+.msg.bot .bubble {
+  background: var(--gris-oscuro);
+  color: var(--white);
+  border-bottom-left-radius: 4px;
+}
+.msg.user .bubble {
+  background: var(--lima-principal);
+  color: #10130a;
+  font-weight: 500;
+  border-bottom-right-radius: 4px;
+}
+
+.msg .timestamp {
+  font-size: 10px;
+  color: var(--gris-claro);
+  margin-top: 4px;
+  padding: 0 4px;
+}
+
+.input-bar {
+  padding: 14px 16px;
+  border-top: 1px solid var(--gris-medio);
+  background: var(--bg);
+  flex-shrink: 0;
+}
+#chatForm {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--fondo-principal);
+  border: 1px solid var(--gris-medio);
+  border-radius: 999px;
+  padding: 6px 6px 6px 16px;
+}
+#pregunta {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--white);
+  font-size: 14px;
+}
+#pregunta::placeholder { color: var(--gris-claro); }
+
+#sendBtn {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: var(--lima-principal);
+  color: #10130a;
+  border: none;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+#sendBtn:hover { background: var(--lima-intenso); }
+#sendBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.typing { display: flex; gap: 4px; padding: 4px 0; }
+.typing span {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--gris-claro);
+  animation: bounce 1s infinite;
+  display: inline-block;
+}
+.typing span:nth-child(2) { animation-delay: 0.15s; }
+.typing span:nth-child(3) { animation-delay: 0.3s; }
+@keyframes bounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
+
+.chat-container::-webkit-scrollbar { width: 6px; }
+.chat-container::-webkit-scrollbar-thumb {
+  background: var(--gris-medio);
+  border-radius: 999px;
+}
