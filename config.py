@@ -18,14 +18,12 @@ LLM_TEMPERATURE = 0
 
 TOP_K = 4
 
-GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
-if not GOOGLE_API_KEY:
+if not GROQ_API_KEY:
     raise EnvironmentError(
-        "No se encontro GOOGLE_API_KEY. Copia .env.example a .env y completa tu clave "
+        "No se encontro GROQ_API_KEY. Copia .env.example a .env y completa tu clave "
     )
-
 if not GROQ_API_KEY:
     raise EnvironmentError(
         "No se encontro GROQ_API_KEY. Copia .env.example a .env y completa tu clave "
